@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부스 선택</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .button:hover {
+            background-color: #f3f4f6;
+        }
+        .button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-2xl mx-auto p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button 
+                class="button bg-white border border-gray-300 rounded px-4 py-2"
+                data-url="./backpage.html">
+                돌아가기
+            </button>
+            <div class="text-gray-700">사용자 정보</div>
+        </div>
+        <h1 class="text-2xl font-bold text-center mb-6">원하는 부스를 선택하세요</h1>
+        <div class="space-y-4">
+            <!-- 각 버튼에 data-url 속성을 추가하여 다른 파일로 이동 -->
+            <div class="button bg-white border border-gray-300 rounded-lg p-4 flex items-center" data-url="./booths/부스1.html">
+                <div class="w-16 h-16 bg-gray-200 flex-shrink-0"></div>
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 1</div>
+                    <div class="text-gray-600">부스 1의 간단 소개글</div>
+                </div>
+            </div>
+            <div class="button bg-white border border-gray-300 rounded-lg p-4 flex items-center" data-url="./booths/부스2.html">
+                <div class="w-16 h-16 bg-gray-200 flex-shrink-0"></div>
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 2</div>
+                    <div class="text-gray-600">부스 2의 간단 소개글</div>
+                </div>
+            </div>
+            <div class="button bg-white border border-gray-300 rounded-lg p-4 flex items-center" data-url="./booths/부스3.html">
+                <div class="w-16 h-16 bg-gray-200 flex-shrink-0"></div>
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 3</div>
+                    <div class="text-gray-600">부스 3의 간단 소개글</div>
+                </div>
+            </div>
+            <div class="button bg-white border border-gray-300 rounded-lg p-4 flex items-center" data-url="./booths/부스4.html">
+                <div class="w-16 h-16 bg-gray-200 flex-shrink-0"></div>
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 4</div>
+                    <div class="text-gray-600">부스 4의 간단 소개글</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="select_booth.js"></script>
+</body>
+</html>
