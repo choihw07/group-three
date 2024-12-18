@@ -4,69 +4,29 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Main Screen</title>
+   <link rel="stylesheet" href="styles.css">
    <style>
-      body {
-         font-family: Arial, sans-serif;
-         margin: 0;
-         padding: 0;
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: center;
-         height: 100vh;
-         background-color: #f4f4f4;
-      }
-      header {
-         width: 100%;
-         padding: 10px 20px;
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         background-color: #333;
-         color: #fff;
-         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      header .balance {
-         font-size: 18px;
-      }
-      header .menu {
-         cursor: pointer;
-         font-size: 20px;
-         border: none;
-         background: none;
-         color: #fff;
-      }
       main {
-         margin-top: 20px;
-         text-align: center;
-      }
-      .button {
-         margin: 10px;
-         padding: 15px 20px;
-         font-size: 16px;
-         border: none;
-         border-radius: 5px;
-         background-color: #007BFF;
-         color: #fff;
-         cursor: pointer;
-      }
-      .button:hover {
-         background-color: #0056b3;
+         margin-top: 100px; /* 기존 간격보다 넓게 조정 */
       }
    </style>
 </head>
 <body>
    <header>
-      
-잔액: ₩{{ balance }}
-
+      <span class="balance">잔액: 닢</span>
       <button class="menu">☰</button>
+      <div class="menu-bar">
+         <ul>
+            <li>프로필</li>
+            <li id="auth-button">로그인</li>
+         </ul>
+      </div>
    </header>
    <main>
-      <button class="button" data-url="./map/maps.html">지도 확인</button>
-      <button class="button" data-url="./select_booth/select_booth.html">부스 확인</button>
-      <button class="button" data-url="./schedule/party_schedule.html">행사 일정</button>
-      <button class="button" data-url="./select_floor/select_floor.html">공간</button>
+      <button class="button" data-url="../map/maps.html">외부 지도 확인</button>
+      <button class="button" data-url="../select_floor/select_floor.html">내부 지도 확인</button>
+      <button class="button" data-url="../select_booth/select_booth.html">부스 확인</button>
+      <button class="button" data-url="../schedule/party_schedule.html">행사 일정</button>
    </main>
 
    <script src="main.js"></script>
