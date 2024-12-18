@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부스 선택</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function getMenuUrl() {
+            return "{{ url_for('menu') }}"; // Flask에서 menu URL을 가져옵니다.
+        }
+    </script>
+    <style>
+        /* hover 및 active 효과를 제거 */
+        .booth-item:hover {
+            background-color: transparent;  /* hover 시 배경색 변경 안함 */
+        }
+        .booth-item:active {
+            transform: none;  /* 클릭 시 크기 줄어듬 없앰 */
+        }
+        .scrollable-container {
+            max-width: 360px; /* 가로 크기 제한 */
+            max-height: 640px; /* 세로 크기 제한 */
+            height: 100%; /* 컨테이너가 채울 수 있는 높이 */
+            overflow-y: auto; /* 스크롤 활성화 */
+        }
+        /* 버튼 스타일 */
+        .booth-button {
+            width: 100%; /* 버튼이 부스 항목의 전체 너비를 차지하도록 설정 */
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+        }
+        .booth-button:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="font-sans flex items-center justify-center min-h-screen" style="background-image: url('/static/background.jpg'); background-size: cover; background-position: center;">
+    <!-- 16:9 비율 컨테이너 -->
+    <div class="scrollable-container max-w-screen-lg aspect-[9/16] bg-white bg-opacity-90 rounded-lg shadow-lg p-4">
+        <div class="flex justify-between items-center mb-4">
+            <button class="bg-blue-500 text-white border border-blue-500 rounded px-4 py-2 hover:bg-blue-600">
+                돌아가기
+            </button>
+            <div class="text-gray-700">사용자 정보</div>
+        </div>
+        
+        <h1 class="text-2xl font-bold text-center mb-6">원하는 부스를 선택하세요</h1>
+        <div class="space-y-4">
+            <!-- 부스 항목을 버튼으로 변경 -->
+            <button class="booth-button flex items-center" onclick="window.location.href=getMenuUrl()">
+                <img src="{{ url_for('static', filename='image_example1.png') }}" class="w-16 h-16">
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 이름</div>
+                    <div class="text-gray-600">간단 소개글</div>
+                </div>
+            </button>
+            <button class="booth-button flex items-center" onclick="window.location.href=getMenuUrl()">
+                <img src="{{ url_for('static', filename='image_example2.jpg') }}" class="w-16 h-16">
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 이름</div>
+                    <div class="text-gray-600">간단 소개글</div>
+                </div>
+            </button>
+            <button class="booth-button flex items-center" onclick="window.location.href=getMenuUrl()">
+                <img src="{{ url_for('static', filename='image_example3.png') }}" class="w-16 h-16">
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 이름</div>
+                    <div class="text-gray-600">간단 소개글</div>
+                </div>
+            </button>
+            <button class="booth-button flex items-center" onclick="window.location.href=getMenuUrl()">
+                <img src="{{ url_for('static', filename='image_example4.jpg') }}" class="w-16 h-16">
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 이름</div>
+                    <div class="text-gray-600">간단 소개글</div>
+                </div>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
