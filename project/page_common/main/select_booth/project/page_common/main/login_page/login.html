@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 로그인</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+    // Base64 디코딩 함수
+    function decodeBase64Unicode(str) {
+        return decodeURIComponent(
+            Array.prototype.map
+                .call(atob(str), (c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                .join('')
+        );
+    }
+
+    // 구글 로그인 후 처리 함수
+    function handleCredentialResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+
+        // JWT 디코딩 후 사용자 정보 표시
+        const payload = decodeBase64Unicode(response.credential.split('.')[1]);
+        const user = JSON.parse(payload);
+        console.log("User Info:", user);
+
+        document.getElementById('user-info').innerHTML = `
+            <h3>사용자 정보</h3>
+            <p><strong>이름:</strong> ${user.name}</p>
+            <p><strong>이메일:</strong> ${user.email}</p>
+            <img src="${user.picture}" alt="Profile Picture">
+        `;
+
+        // 특정 조건에 맞으면 관리자 페이지로 이동
+        if (user.email === 'admin@example.com') {  // 예시: 이메일이 'admin@example.com'일 때 관리자 페이지로 이동
+            window.location.href = '../../page_master/main_master/master.html';  // 관리자 페이지로 이동
+        }
+    }
+
+    // 구글 로그인 초기화
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "YOUR_GOOGLE_CLIENT_ID",  // Google Cloud Console에서 발급받은 Client ID
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("google-login-button"),
+            { theme: "outline", size: "large", width: "300"}  // 버튼 스타일
+        );
+        google.accounts.id.prompt();  // 자동 로그인 팝업 표시
+    };
+
+    // 구글 로그아웃 함수
+    function googlelogout() {
+        google.accounts.id.disableAutoSelect();
+        document.getElementById('user-info').innerHTML = '';
+        alert('로그아웃 되었습니다.');
+    }
+
+    // 카카오 로그인 초기화
+    Kakao.init('YOUR_KAKAO_JS_KEY');  // 카카오 디벨로퍼스에서 복사한 JavaScript 키
+    console.log(Kakao.isInitialized());  // 초기화 확인 (true가 출력되면 성공)
+
+    // 카카오 로그인 함수
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function(authObj) {
+                console.log(authObj); // 로그인 성공 시 토큰 정보 출력
+                getUserInfo(); // 사용자 정보 가져오기
+            },
+            fail: function(err) {
+                console.error(err); // 로그인 실패 시 에러 출력
+            },
+        });
+    }
+
+    // 카카오 사용자 정보 가져오기
+    function getUserInfo() {
+        Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+                console.log(res); // 사용자 정보 출력
+                document.getElementById('kuser-info').innerText = `
+                    닉네임: ${res.properties.nickname}
+                    이메일: ${res.kakao_account.email || '제공되지 않음'}
+                `;
+
+                // 특정 조건에 맞으면 관리자 페이지로 이동
+                if (res.kakao_account.email === 'admin@example.com') {  // 예시: 이메일이 'admin@example.com'일 때 관리자 페이지로 이동
+                    window.location.href = 'adminPage.html';  // 관리자 페이지로 이동
+                }
+            },
+            fail: function(err) {
+                console.error(err); // 요청 실패 시 에러 출력
+            },
+        });
+    }
+
+    // 카카오 로그아웃 함수
+    function kakaoLogout() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.Auth.logout(() => {
+                alert('로그아웃 완료');
+                document.getElementById('kuser-info').innerText = '';
+            });
+        } else {
+            alert('로그인 상태가 아닙니다.');
+        }
+    }
+    </script>
+    <style>
+        .button-container {
+            display: flex;
+            align-items: center; /* 세로 정렬 중앙 */
+            gap: 10px; /* 버튼 사이 간격 */
+            margin-top: 20px;
+        }
+        .custom-button:hover {
+            background-color: #dcdcdc;
+        }
+        .custom-button {
+            background: none; /* 버튼 배경 없애기 */
+            border: none;    /* 버튼 테두리 없애기 */
+            padding: 0;      /* 기본 여백 없애기 */
+            cursor: pointer; /* 클릭할 수 있도록 커서 변경 */
+        }
+
+        /* 이미지 크기 조정 */
+        button img {
+            width: 500px;   /* 이미지 너비 */
+            height: auto;   /* 자동으로 비율 유지 */
+            display: block; /* 중앙 정렬을 위해 block 속성 */
+        }
+        .option-button:active {
+            transform: scale(0.95);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>로그인</h1>
+    <div class="button-container">
+        <button class="custom-button" onclick="kakaoLogin()">
+            <img src="static/klog.jpg" alt="카카오 로그인">
+        </button>
+        <button class="custom-button" onclick="kakaoLogout()">카카오 로그아웃</button>
+    </div>
+    <div class="button-container">
+        <div id="google-login-button"></div>
+        <button class="custom-button" onclick="googlelogout()">Google 로그아웃</button>
+    </div>
+    <div id="kuser-info" style="margin-top: 20px;">카카오톡 로그인</div>
+    <div id="user-info" style="margin-top: 20px;">구글 로그인</div>
+
+</body>
+</html>
