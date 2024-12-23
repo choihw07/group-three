@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>부스 선택</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <style>
         /* hover 및 active 효과를 제거 */
         .booth-item:hover {
@@ -15,9 +14,8 @@
             transform: none;  /* 클릭 시 크기 줄어듬 없앰 */
         }
         .scrollable-container {
-            max-width: 360px; /* 가로 크기 제한 */
-            max-height: 640px; /* 세로 크기 제한 */
-            height: 100%; /* 컨테이너가 채울 수 있는 높이 */
+            width: 360px; /* 가로 크기 고정 */
+            height: 640px; /* 세로 크기 고정 */
             overflow-y: auto; /* 스크롤 활성화 */
         }
         /* 버튼 스타일 */
@@ -35,13 +33,16 @@
         .booth-button:hover {
             background-color: #f3f4f6;
         }
+        .button-bg {
+            background-color: rgb(0, 74, 255);
+        } 
     </style>
 </head>
 <body class="font-sans flex items-center justify-center min-h-screen" style="background-image: url('/group-three-master/project/page_common/gallery/menuimg/background.jpg'); background-size: cover; background-position: center;">
     <!-- 16:9 비율 컨테이너 -->
-    <div class="scrollable-container max-w-screen-lg aspect-[9/16] bg-white bg-opacity-90 rounded-lg shadow-lg p-4">
+    <div class="scrollable-container bg-white bg-opacity-90 rounded-lg shadow-lg p-4">
         <div class="flex justify-between items-center mb-4">
-            <button class="bg-blue-500 text-white border border-blue-500 rounded px-4 py-2 hover:bg-blue-600" onclick="window.location.href='/group-three-master/project/page_common/main/main.html'">
+            <button class="px-4 py-2 button-bg text-white rounded-lg" onclick="window.location.href='/group-three-master/project/page_common/main/main.html'">
                 돌아가기
             </button>
             <div class="text-gray-700">사용자 정보</div>
@@ -53,7 +54,7 @@
             <button class="booth-button flex items-center" onclick="window.location.href='./menu/menu.html'">
                 <img src="/group-three-master/project/page_common/gallery/image_example1.png" class="w-16 h-16">
                 <div class="ml-4">
-                    <div class="text-lg font-semibold">부스 이름</div>
+                    <div class="text-lg font-semibold">미미반점</div>
                     <div class="text-gray-600">간단 소개글</div>
                 </div>
             </button>
@@ -73,6 +74,13 @@
             </button>
             <button class="booth-button flex items-center" onclick="window.location.href='./menu/menu.html'">
                 <img src="/group-three-master/project/page_common/gallery/image_example4.jpg" class="w-16 h-16">
+                <div class="ml-4">
+                    <div class="text-lg font-semibold">부스 이름</div>
+                    <div class="text-gray-600">간단 소개글</div>
+                </div>
+            </button>
+            <button class="booth-button flex items-center" onclick="window.location.href='./menu/menu.html'">
+                <img src="/group-three-master/project/page_common/gallery/image_example1.png" class="w-16 h-16">
                 <div class="ml-4">
                     <div class="text-lg font-semibold">부스 이름</div>
                     <div class="text-gray-600">간단 소개글</div>
