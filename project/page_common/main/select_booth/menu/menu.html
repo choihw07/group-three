@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booth Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 최대 크기 제한과 스크롤 활성화 */
+        .scrollable-container {
+            max-width: 360px; /* 가로 크기 제한 */
+            max-height: 640px; /* 세로 크기 제한 */
+            height: 100%; /* 컨테이너가 채울 수 있는 높이 */
+            overflow-y: auto; /* 스크롤 활성화 */
+        }
+
+        /* 눌림 효과 */
+        .option-item:active {
+            background-color: #e2e8f0; /* 눌림 시 배경색 */
+            transform: scale(0.98);
+        }
+        .black-han-sans-regular {
+            font-family: "Black Han Sans", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen" style="background-image: url('/group-three-master/project/page_common/gallery/menuimg/background.jpg'); background-size: cover; background-position: center;">
+    <!-- 콘텐츠 전체를 감싸는 컨테이너 -->
+    <div class="scrollable-container bg-white shadow-lg rounded-lg">
+        <div class="flex justify-between items-center p-2 border-b">
+            <!-- Back 버튼 -->
+            <button class="text-gray-500 hover:text-gray-700" onclick="window.location.href='/group-three-master/project/page_common/main/select_booth/booth.html'">
+                &larr; Back
+            </button>
+            <!-- 사용자 정보 -->
+            <div class="text-black">사용자 정보</div>
+        </div>
+        <div class="flex p-4 border-b">
+            <div class="w-1/2">
+                <div class="bg-gray-300 h-20 flex items-center justify-center">
+                    <img src="/group-three-master/project/page_common/gallery/menuimg/menu.webp" alt="옵션1사진" class="h-full w-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-1/2 pl-4">
+                <p class="text-gray-700">경희고 최고의 맞집 00분식입니다.</p>
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="space-y-4">
+                <!-- Option 1 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="window.location.href='buy_1.html'">
+                    <div class="w-3/4">
+                        <p class="text-black">치킨</p>
+                        <p class="text-black">19000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/group-three-master/project/page_common/gallery/menuimg/1.jpeg" alt="옵션1사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 2 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="window.location.href='buy_2.html'">
+                    <div class="w-3/4">
+                        <p class="text-black">피자</p>
+                        <p class="text-black">21000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/group-three-master/project/page_common/gallery/menuimg/2.jpeg" alt="옵션2사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 3 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="window.location.href='buy_3.html'">
+                    <div class="w-3/4">
+                        <p class="text-black">콜라</p>
+                        <p class="text-black">1900원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/group-three-master/project/page_common/gallery/menuimg/3.jpeg" alt="옵션3사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 4 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="window.location.href='buy_4.html'">
+                    <div class="w-3/4">
+                        <p class="text-black">사이다</p>
+                        <p class="text-black">1800원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/group-three-master/project/page_common/gallery/menuimg/4.jpeg" alt="옵션4사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 5 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="window.location.href='buy_5.html'">
+                    <div class="w-3/4">
+                        <p class="text-black">감자튀김</p>
+                        <p class="text-black">4000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/group-three-master/project/page_common/gallery/menuimg/5.jpeg" alt="옵션5사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 6 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="window.location.href='buy_6.html'">
+                    <div class="w-3/4">
+                        <p class="text-black">떡볶이</p>
+                        <p class="text-black">4000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/group-three-master/project/page_common/gallery/menuimg/6.jpeg" alt="옵션6사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
