@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 480px;
+            aspect-ratio: 9 / 16;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #6200ea;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .order-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .order-item button {
+            background-color: #ff5252;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .order-item button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">주문 관리</div>
+        <div class="order-list" id="orderList">
+            <!-- Orders will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample data (replace with dynamic data if needed)
+        const orders = [
+            { name: "홍길동", menu: "떡볶이" },
+            { name: "김철수", menu: "순대" },
+            { name: "이영희", menu: "김밥" },
+            { name: "박지수", menu: "라면" },
+            { name: "최민호", menu: "튀김" },
+            { name: "장윤정", menu: "핫도그" },
+            { name: "오세훈", menu: "닭꼬치" },
+            { name: "이수진", menu: "어묵" },
+            { name: "한지민", menu: "과일주스" },
+            { name: "정해인", menu: "커피" },
+            { name: "손예진", menu: "아이스크림" },
+            { name: "배수지", menu: "샌드위치" },
+            { name: "유재석", menu: "만두" },
+            { name: "강호동", menu: "소떡소떡" },
+            { name: "신동엽", menu: "회오리감자" },
+            { name: "박나래", menu: "쥬스" },
+            { name: "김구라", menu: "팝콘" },
+            { name: "서장훈", menu: "과자" },
+            { name: "김희철", menu: "샐러드" },
+            { name: "이광수", menu: "초콜릿" },
+            { name: "전지현", menu: "도넛" },
+            { name: "송혜교", menu: "케이크" },
+            { name: "정우성", menu: "아메리카노" },
+            { name: "이정재", menu: "에이드" },
+            { name: "한효주", menu: "밀크티" },
+            { name: "하지원", menu: "우유" },
+            { name: "공유", menu: "스무디" },
+            { name: "김수현", menu: "티라미수" },
+            { name: "박보검", menu: "마카롱" }
+        ];
+
+        const orderList = document.getElementById('orderList');
+
+        // Function to render orders
+        function renderOrders() {
+            orderList.innerHTML = ''; // Clear the list
+            orders.forEach((order, index) => {
+                const orderItem = document.createElement('div');
+                orderItem.className = 'order-item';
+
+                const orderText = document.createElement('span');
+                orderText.textContent = `${order.name} - ${order.menu}`;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '삭제';
+                deleteButton.onclick = () => deleteOrder(index);
+
+                orderItem.appendChild(orderText);
+                orderItem.appendChild(deleteButton);
+                orderList.appendChild(orderItem);
+            });
+        }
+
+        // Function to delete an order
+        function deleteOrder(index) {
+            if (confirm('정말 지우겠습니까?')) {
+                orders.splice(index, 1); // Remove the order
+                renderOrders(); // Re-render the list
+            }
+        }
+
+        // Initial render
+        renderOrders();
+    </script>
+</body>
+</html>
