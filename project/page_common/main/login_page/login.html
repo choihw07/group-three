@@ -3,213 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입 및 장바구니</title>
-    <!-- Firebase SDK -->
-    <script type="module">
-        // Firebase SDK를 모듈로 가져오기
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
-
-        // Firebase 초기화
-        const firebaseConfig = {
-            apiKey: "AIzaSyBzEjwURyiDcmWrM_vdqANVN9WxJQr6d08",
-            authDomain: "khsparty.firebaseapp.com",
-            databaseURL: "https://khsparty-default-rtdb.firebaseio.com",
-            projectId: "khsparty",
-            storageBucket: "khsparty.firebasestorage.app",
-            messagingSenderId: "658831845381",
-            appId: "1:658831845381:web:7176c6d631807e5b5ed46c",
-            measurementId: "G-NCE5618PZY"
-        };
-
-        // Firebase 앱 초기화
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const database = getDatabase(app);
-
-        // 이메일 유효성 검사 함수
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        // 회원가입 함수
-        window.signUp = function() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-            const username = document.getElementById("username").value;
-
-            // 이메일 유효성 검사
-            if (!validateEmail(email)) {
-                alert("유효한 이메일을 쓰세요.");
-                return; // 유효하지 않은 경우 함수 종료
-            }
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // 회원가입 성공
-                    const user = userCredential.user;
-                    console.log("회원가입 성공:", user);
-                    alert("회원가입이 완료되었습니다.");
-
-                    // 사용자 정보를 Realtime Database에 저장
-                    saveUserData(user.uid, username, email);
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-
-                    if (errorCode === 'auth/email-already-in-use') {
-                        alert("이미 회원가입된 이메일입니다.");
-                    } else {
-                        console.error("회원가입 실패:", errorMessage);
-                        alert(errorMessage);
-                    }
-                    location.reload(); // 오류 발생 시 새로 고침
-                });
-        };
-
-        // 사용자 정보를 Realtime Database에 저장
-        function saveUserData(userId, username, email) {
-            set(ref(database, 'users/' + userId), {
-                username: username,
-                email: email,
-                createdAt: new Date().toISOString(),
-                cartTotal: 0 // 초기 장바구니 금액
-            })
-            .then(() => {
-                console.log("사용자 정보 저장 성공");
-            })
-            .catch((error) => {
-                console.error("사용자 정보 저장 실패:", error);
-            });
-        }
-
-        // 로그인 함수
-        window.login = function() {
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // 로그인 성공
-                    const user = userCredential.user;
-                    console.log("로그인 성공:", user);
-                    alert("로그인이 완료되었습니다.");
-                    // 로그인 후 장바구니 금액 로드
-                    loadCartTotal();
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.error("로그인 실패:", errorMessage);
-                    alert(errorMessage);
-                });
-        };
-
-        // 로그아웃 함수
-        window.logout = function() {
-            signOut(auth).then(() => {
-                console.log("로그아웃 성공");
-                alert("로그아웃되었습니다.");
-                location.reload(); // 페이지 새로 고침
-            }).catch((error) => {
-                console.error("로그아웃 실패:", error);
-            });
-        };
-
-        // 장바구니 금액 추가 함수
-        window.addToCart = function() {
-            const userId = auth.currentUser.uid; // 현재 로그인한 사용자 ID
-            const amount = parseFloat(document.getElementById("cartAmount").value); // 추가할 금액
-
-            if (isNaN(amount) || amount <= 0) {
-                alert("유효한 금액을 입력하세요.");
-                return;
-            }
-
-            // 사용자 데이터 로드
-            const userRef = ref(database, 'users/' + userId);
-            get(child(userRef, 'cartTotal')).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const currentTotal = snapshot.val();
-                    const newTotal = currentTotal + amount;
-
-                    // 장바구니 금액 업데이트
-                    set(ref(database, 'users/' + userId), {
-                        cartTotal: newTotal
-                    })
-                    .then(() => {
-                        console.log("장바구니 금액 업데이트 성공");
-                        alert("장바구니 금액이 업데이트되었습니다.");
-                    })
-                    .catch((error) => {
-                        console.error("장바구니 금액 업데이트 실패:", error);
-                    });
-                } else {
-                    console.log("사용자 데이터 없음");
-                }
-            }).catch((error) => {
-                console.error("데이터 로드 실패:", error);
-            });
-        };
-
-        // 장바구니 금액 로드 함수
-        window.loadCartTotal = function() {
-            const userId = auth.currentUser.uid; // 현재 로그인한 사용자 ID
-
-            const userRef = ref(database, 'users/' + userId);
-            get(child(userRef, 'cartTotal')).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const cartTotal = snapshot.val();
-                    alert("현재 장바구니 금액: " + cartTotal);
-                } else {
-                    console.log("사용자 데이터 없음");
-                }
-            }).catch((error) => {
-                console.error("데이터 로드 실패:", error);
-            });
-        };
-
-        // 사용자 상태 변화 감지
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // 사용자 로그인 상태
-                console.log("사용자 로그인:", user);
-                document.getElementById("loggedIn").style.display = "block";
-                document.getElementById("loggedOut").style.display = "none";
-            } else {
-                // 사용자 로그아웃 상태
-                console.log("사용자 로그아웃");
-                document.getElementById("loggedIn").style.display = "none";
-                document.getElementById("loggedOut").style.display = "block";
-            }
-        });
-    </script>
+    <title>로그인</title>
+    <link rel="stylesheet" href="/make/login.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>회원가입 및 장바구니</h1>
-
-    <div id="loggedOut">
-        <h2>회원가입</h2>
-        <input type="text" id="username" placeholder="사용자 이름" required />
-        <input type="email" id="email" placeholder="이메일" required />
-        <input type="password" id="password" placeholder="비밀번호" required />
-        <button onclick="signUp()">회원가입</button>
-
-        <h2>로그인</h2>
-        <input type="email" id="loginEmail" placeholder="이메일" required />
-        <input type="password" id="loginPassword" placeholder="비밀번호" required />
-        <button onclick="login()">로그인</button>
-    </div>
-
-    <div id="loggedIn" style="display:none;">
-        <h2>장바구니</h2>
-        <input type="number" id="cartAmount" placeholder="장바구니 금액" required />
-        <button onclick="addToCart()">장바구니에 추가</button>
+<body class="bg-[url('/gallery/menuimg/background.jpg')] bg-cover bg-center text-gray-900 flex items-center justify-center h-screen">
+    <div class="aspect-ratio-9-16 bg-white shadow-lg rounded-lg flex flex-col">
+        <div class="flex justify-center mb-6">
+            <img src="/gallery/khlogo.png" alt="Logo" class="logo rounded-full">
+        </div>
+        <h1 class="text-center text-2xl font-bold mb-2">Kyunghee High School</h1>
+        <div id="loggedOut" class="flex-grow flex flex-col items-center justify-start p-4">
+            <input type="email" id="loginEmail" placeholder="이메일 주소" class="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mx-auto" required/>
+            <input type="password" id="loginPassword" placeholder="비밀번호" class="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mx-auto" required/>
+            <button onclick="login()" class="w-full p-3 button-bg text-white rounded hover:bg-blue-600 transition mx-auto">로그인</button>
+        </div>
+        <div class="flex items-center my-6">    
+            <hr class="flex-grow border-t border-gray-300">
+            <span class="mx-4 text-gray-500">또는</span>
+            <hr class="flex-grow border-t border-gray-300">
+        </div>
+        <button class="w-3/4 p-3 mb-4 border border-gray-300 rounded hover:bg-gray-100 transition mx-auto">카카오 로그인</button>
+        <button class="w-3/4 p-3 mb-4 border border-gray-300 rounded hover:bg-gray-100 transition mx-auto">구글 로그인</button>
+        <button class="w-3/4 p-3 mb-4 border border-gray-300 rounded hover:bg-gray-100 transition mx-auto">페이스북 로그인</button>
+        <p class="text-center text-gray-600 mt-4">계정이 없으신가요? <a href="/sign" class="text-blue-500 hover:underline">회원가입</a></p>
         <button onclick="loadCartTotal()">장바구니 금액 로드</button>
-        <button onclick="logout()">로그아웃</button>
     </div>
+    <script type="module" src="/make/login.js"></script>
 </body>
 </html>
+
