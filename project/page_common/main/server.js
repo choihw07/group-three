@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const fs = require('fs');
+const https = require('https');
 const bodyParser = require('body-parser');
 const port = 3000; // 서버 포트 설정
 const { initializeApp } = require('firebase/app');
@@ -8,14 +10,14 @@ const { getDatabase, ref, set, get, child } = require('firebase/database');
 app.use(bodyParser.json());
 //firebase realtime
 const firebaseConfig = {
-  apiKey: "AIzaSyB0Sq7soQOiM2K4QSYahqs4jQyvFQ-BxUM",
-  authDomain: "kyunghee-web.firebaseapp.com",
-  databaseURL: "https://kyunghee-web-default-rtdb.firebaseio.com",
-  projectId: "kyunghee-web",
-  storageBucket: "kyunghee-web.firebasestorage.app",
-  messagingSenderId: "553380540916",
-  appId: "1:553380540916:web:01a1e7643203434b8709a1",
-  measurementId: "G-DGP06HYBEY"
+    apiKey: "AIzaSyBzEjwURyiDcmWrM_vdqANVN9WxJQr6d08",
+    authDomain: "khsparty.firebaseapp.com",
+    databaseURL: "https://khsparty-default-rtdb.firebaseio.com",
+    projectId: "khsparty",
+    storageBucket: "khsparty.firebasestorage.app",
+    messagingSenderId: "658831845381",
+    appId: "1:658831845381:web:7176c6d631807e5b5ed46c",
+    measurementId: "G-NCE5618PZY"
 };
 const DB = initializeApp(firebaseConfig);
 const db = getDatabase(DB);
@@ -47,10 +49,13 @@ app.get('/schedule', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'login_page', 'login.html')); // 현재 디렉토리에서 menu.html 제공
 });
-// 서버 시작
-app.listen(port, () => {
-    console.log(`서버가 http://localhost:${port} 에서 실행 중입니다.`);
+app.get('/sign', (req, res) => {
+    res.sendFile(path.join(__dirname, 'login_page', 'sign.html')); // 현재 디렉토리에서 menu.html 제공
 });
+// 서버 시작
+// app.listen(port, () => {
+//     console.log(`서버가 http://0.0.0.0:${port}에서 실행되고 있습니다.`);
+// });
 app.post('/add-to-cart', async (req, res) => {
     const { totalPrice } = req.body;
 
@@ -82,3 +87,10 @@ app.get('/cart', async (req, res) => {
         res.status(500).send("Error getting documents");
     }
 });
+const options = {
+    key: fs.readFileSync('localhost-key.pem'),
+    cert: fs.readFileSync('localhost.pem')
+};
+https.createServer(options, app).listen(3000, () => {
+    console.log('HTTPS 서버가 https://localhost:3000 에서 실행 중입니다.');
+}); 
