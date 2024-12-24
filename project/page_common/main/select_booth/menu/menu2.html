@@ -8,8 +8,66 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/make/menu.css">
-<script src="/make/menu.js"></script>
+    <style>
+        /* 최대 크기 제한과 스크롤 활성화 */
+        .scrollable-container {
+            max-width: 360px; /* 가로 크기 제한 */
+            max-height: 640px; /* 세로 크기 제한 */
+            height: 100%; /* 컨테이너가 채울 수 있는 높이 */
+            overflow-y: auto; /* 스크롤 활성화 */
+        }
+
+        /* 눌림 효과 */
+        .option-item:active {
+            background-color: #e2e8f0; /* 눌림 시 배경색 */
+            transform: scale(0.98);
+        }
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 360px; /* 상단 컨테이너와 동일한 가로 크기 */
+            background-color: white;
+            border-top: 1px solid #e2e8f0;
+            z-index: 1000;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fixed-footer button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .fixed-footer button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+<script>
+    function gobuy(num) {
+        window.location.href=`/buy_/${num}`;
+    }
+    function fetchCartStatus() {
+        fetch('/cart')
+            .then(response => response.json())
+            .then(data => {
+                const totalElement = document.getElementById('cart-total');
+                totalElement.textContent = `${data.total.toLocaleString()}원`;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // 페이지 로드 시 장바구니 상태 조회
+    window.onload = fetchCartStatus;
+</script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen" style="background-image: url('/gallery/menuimg/background.jpg'); background-size: cover; background-position: center;">
     <div class="scrollable-container bg-white shadow-lg rounded-lg">
@@ -26,7 +84,7 @@
                 </div>
             </div>
             <div class="w-1/2 pl-4">
-                <p class="text-gray-700">경희고 최고의 맞집 서준입니다.</p>
+                <p class="text-gray-700">아무나 다 와라</p>
             </div>
         </div>
         <div class="p-4">
@@ -34,69 +92,79 @@
                 <!-- Option 1 -->
                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(1)">
                     <div class="w-3/4">
-                        <p class="text-black">치킨</p>
-                        <p class="text-black">19000원</p>
+                        <p class="text-black">떡꼬치</p>
+                        <p class="text-black">2000원</p>
                     </div>
                     <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
-                        <img src="/gallery/menuimg/1.jpeg" alt="옵션1사진" class="h-full w-full object-cover rounded-lg">
+                        <img src="/gallery/menuimg/1.jpeg" alt="떡꼬치 사진" class="h-full w-full object-cover rounded-lg">
                     </div>
                 </div>
                 <!-- Option 2 -->
                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(2)">
                     <div class="w-3/4">
-                        <p class="text-black">피자</p>
-                        <p class="text-black">21000원</p>
+                        <p class="text-black">소떡소떡</p>
+                        <p class="text-black">2500원</p>
                     </div>
                     <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
-                        <img src="/gallery/menuimg/2.jpeg" alt="옵션2사진" class="h-full w-full object-cover rounded-lg">
+                        <img src="/gallery/menuimg/2.jpeg" alt="소떡소떡 사진" class="h-full w-full object-cover rounded-lg">
                     </div>
                 </div>
                 <!-- Option 3 -->
                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(3)">
                     <div class="w-3/4">
-                        <p class="text-black">콜라</p>
-                        <p class="text-black">1900원</p>
+                        <p class="text-black">유자차</p>
+                        <p class="text-black">700원</p>
                     </div>
                     <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
-                        <img src="/gallery/menuimg/3.jpeg" alt="옵션3사진" class="h-full w-full object-cover rounded-lg">
+                        <img src="/gallery/menuimg/3.jpeg" alt="유자차 사진" class="h-full w-full object-cover rounded-lg">
                     </div>
                 </div>
                 <!-- Option 4 -->
                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(4)">
                     <div class="w-3/4">
-                        <p class="text-black">사이다</p>
+                        <p class="text-black">감자 고로케</p>
                         <p class="text-black">1800원</p>
                     </div>
                     <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
-                        <img src="/gallery/menuimg/4.jpeg" alt="옵션4사진" class="h-full w-full object-cover rounded-lg">
+                        <img src="/gallery/menuimg/4.jpeg" alt="감자 고로케 사진" class="h-full w-full object-cover rounded-lg">
                     </div>
                 </div>
                 <!-- Option 5 -->
                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(5)">
                     <div class="w-3/4">
-                        <p class="text-black">감자튀김</p>
-                        <p class="text-black">4000원</p>
+                        <p class="text-black">피카츄 돈가스</p>
+                        <p class="text-black">3000원</p>
                     </div>
                     <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
-                        <img src="/gallery/menuimg/5.jpeg" alt="옵션5사진" class="h-full w-full object-cover rounded-lg">
+                        <img src="/gallery/menuimg/5.jpeg" alt="피카츄 돈가스 사진" class="h-full w-full object-cover rounded-lg">
                     </div>
                 </div>
                 <!-- Option 6 -->
                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(6)">
                     <div class="w-3/4">
-                        <p class="text-black">떡볶이</p>
-                        <p class="text-black">4000원</p>
+                        <p class="text-black">피크닉</p>
+                        <p class="text-black">700원</p>
                     </div>
                     <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
-                        <img src="/gallery/menuimg/6.jpeg" alt="옵션6사진" class="h-full w-full object-cover rounded-lg">
+                        <img src="/gallery/menuimg/6.jpeg" alt="피크닉 사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                 <!-- Option 7 -->
+                 <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(6)">
+                    <div class="w-3/4">
+                        <p class="text-black">팔씨름</p>
+                        <p class="text-black">500원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/6.jpeg" alt="팔씨름 사진" class="h-full w-full object-cover rounded-lg">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="fixed-footer rounded">
-        <span class="text-black">총 합계: 0원</span>
+        <span class="text-black">총 합계: <span id ="cart-total">0원</span> </span>
         <button onclick="alert('주문이 완료되었습니다!');">주문하기</button>
     </div>
 </body>
-</html>
+</html>  
