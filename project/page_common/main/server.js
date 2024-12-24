@@ -8,14 +8,14 @@ const { getDatabase, ref, set, get, child } = require('firebase/database');
 app.use(bodyParser.json());
 //firebase realtime
 const firebaseConfig = {
-    apiKey: "AIzaSyBzEjwURyiDcmWrM_vdqANVN9WxJQr6d08",
-    authDomain: "khsparty.firebaseapp.com",
-    databaseURL: "https://khsparty-default-rtdb.firebaseio.com",
-    projectId: "khsparty",
-    storageBucket: "khsparty.firebasestorage.app",
-    messagingSenderId: "658831845381",
-    appId: "1:658831845381:web:7176c6d631807e5b5ed46c",
-    measurementId: "G-NCE5618PZY"
+  apiKey: "AIzaSyB0Sq7soQOiM2K4QSYahqs4jQyvFQ-BxUM",
+  authDomain: "kyunghee-web.firebaseapp.com",
+  databaseURL: "https://kyunghee-web-default-rtdb.firebaseio.com",
+  projectId: "kyunghee-web",
+  storageBucket: "kyunghee-web.firebasestorage.app",
+  messagingSenderId: "553380540916",
+  appId: "1:553380540916:web:01a1e7643203434b8709a1",
+  measurementId: "G-DGP06HYBEY"
 };
 const DB = initializeApp(firebaseConfig);
 const db = getDatabase(DB);
