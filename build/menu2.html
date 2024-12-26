@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booth Options</title>
+    <link rel="icon" href="/gallery/icon.png"/>
+    <link rel="apple-touch-icon" href="/gallery/icon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/make/menu.css">
+<script src="/make/menu.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen" style="background-image: url('/gallery/menuimg/background.jpg'); background-size: cover; background-position: center;">
+    <div class="scrollable-container bg-white shadow-lg rounded-lg">
+        <div class="flex justify-between items-center p-2 border-b">
+            <button class="text-gray-500 hover:text-gray-700" onclick="window.location.href='booth.html'">
+                &larr; Back
+            </button>
+            <div class="text-black">사용자 정보</div>
+        </div>
+        <div class="flex p-4 border-b">
+            <div class="w-1/2">
+                <div class="bg-gray-300 h-20 flex items-center justify-center">
+                    <img src="/gallery/menuimg/menu.webp" alt="옵션1사진" class="h-full w-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-1/2 pl-4">
+                <p class="text-gray-700">경희고 최고의 맞집 서준입니다.</p>
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="space-y-4">
+                <!-- Option 1 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(1)">
+                    <div class="w-3/4">
+                        <p class="text-black">치킨</p>
+                        <p class="text-black">19000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/1.jpeg" alt="옵션1사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 2 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(2)">
+                    <div class="w-3/4">
+                        <p class="text-black">피자</p>
+                        <p class="text-black">21000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/2.jpeg" alt="옵션2사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 3 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(3)">
+                    <div class="w-3/4">
+                        <p class="text-black">콜라</p>
+                        <p class="text-black">1900원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/3.jpeg" alt="옵션3사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 4 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(4)">
+                    <div class="w-3/4">
+                        <p class="text-black">사이다</p>
+                        <p class="text-black">1800원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/4.jpeg" alt="옵션4사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 5 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(5)">
+                    <div class="w-3/4">
+                        <p class="text-black">감자튀김</p>
+                        <p class="text-black">4000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/5.jpeg" alt="옵션5사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 6 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(6)">
+                    <div class="w-3/4">
+                        <p class="text-black">떡볶이</p>
+                        <p class="text-black">4000원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/6.jpeg" alt="옵션6사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-footer rounded">
+        <span class="text-black">총 합계: 0원</span>
+        <button onclick="alert('주문이 완료되었습니다!');">주문하기</button>
+    </div>
+</body>
+</html>

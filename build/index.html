@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경황제</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/gallery/icon.png"/>
+    <link rel="apple-touch-icon" href="/gallery/icon.png"/>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .shadow-line {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+      .button-scale:active {  
+          transform: scale(0.95);
+      }
+      .button-bg {
+          background-color: rgb(0, 74, 255);
+      }
+      .aspect-ratio-9-16 {
+          width: 360px;
+          height: 640px;
+          overflow-y: auto; /* 스크롤 활성화 */
+      }
+      .button-width {
+        width: 40px;
+      }
+      .footer-links {
+            display: flex;
+            align-items: center; /* 수직 중앙 정렬 */
+        }
+      .pointer {
+         cursor: pointer;
+      }
+
+    </style>
+</head>
+<body class="bg-[url('gallery/menuimg/background.jpg')] bg-cover bg-center text-gray-900 flex items-center justify-center h-screen">
+  <div class="aspect-ratio-9-16 bg-white shadow-lg rounded-lg flex flex-col">
+    <header class="bg-white shadow-line p-4 flex justify-between items-center">
+      <div class="flex items-center">
+            <a href="index.html">
+                <img src="gallery/khlogo.png" alt="Logo" class="mr- button-width">
+            </a>
+          <h1 class="text-xl font-bold">경황제</h1>
+          <h2 class="text-xl font-bold ml-20" id="user-info"></h2>
+      </div>
+      <button id="menuButton" class="text-2xl">☰</button>
+    </header>
+
+    <nav id="menu" class="hidden bg-gray-100 shadow-line p-4">
+        <ul>
+            <li><a href="#" class="block py-2 shadow-line">프로필</a></li>
+            <li id="auth-button" class="pointer py-2 shadow-line"><a href="login.html">로그인</a></li>
+            <li id="currentmoney"><a href="#" class="block py-2 shadow-line">잔액</a></li>
+        </ul>
+    </nav>
+
+    <main class="p-4 space-y-6">
+        <section class="bg-white p-10 shadow-line rounded">
+            <h2 class="text-lg font-bold">경황제 안내 지도</h2>
+            <button class="button mt-2 bg-blue-500 text-white py-1 px-4 rounded" data-url="maps.html">확인하러 가기</button>
+        </section>
+
+        <section class="bg-white p-10 shadow-line rounded">
+            <h2 class="text-lg font-bold">먹거리 부스 예약</h2>
+            <button class="button mt-2 bg-blue-500 text-white py-1 px-4 rounded" data-url="booth.html">예약하러 가기    </button>
+        </section>
+
+        <section class="bg-white p-10 shadow-line rounded">
+            <h2 class="text-lg font-bold">행사 일정</h2>
+            <button class="button mt-2 bg-blue-500 text-white py-1 px-4 rounded" data-url="party_schedule.html">일정보러 가기</button>
+        </section>
+    </main>
+
+    <footer class="bg-white p-4 shadow-line mt-6">
+        <div class="flex items-center">
+            <img src="/gallery/khlogo.png" alt="Logo" class="mr-2 button-width">
+            <div>
+                <h2 class="text-lg font-bold">경희고등학교</h2>
+                <a href="https://naver.me/GgWkfEKb">주소: 서울특별시 동대문구 경희대로 26</a>
+                <p>전화번호: 02-966-3782</p>
+            </div>
+        </div>
+        <div class="flex justify mb-4 footer-links">
+            <a href="https://www.instagram.com/khhs_sc/" target="_blank">
+                <img src="/gallery/insta.jpeg" alt="Instagram" class="w-1/4 button-width">
+                학생회 인스타
+            </a>
+            <a href="https://www.youtube.com/@khmedialab" target="_blank">
+                <img src="/gallery/yt.png" alt="YouTube" class="w-1/4 button-width">
+                경희 미랩
+            </a>
+        </div>
+    </footer>
+  </div>
+    
+    <script type="module" src="/main/make/main.js"></script>
+</body>
+</html>

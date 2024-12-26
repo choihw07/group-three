@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산</title>
+    <link rel="icon" href="/gallery/icon.png"/>
+    <link rel="apple-touch-icon" href="/gallery/icon.png"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+       function gomenu(number) {
+            // 숫자를 이용하여 URL 생성
+            const url = `menu${number}.html`;
+            // 해당 URL로 이동
+            window.location.href = url;
+        }
+    </script>
+    <link rel="stylesheet" href="/make/buy.css">
+</head>
+<body class="bg-[url('/gallery/menuimg/background.jpg')] bg-cover bg-center text-gray-900 flex items-center justify-center h-screen">
+    <!-- 화면 비율 9:16로 제한된 컨테이너 -->
+    <div class="aspect-ratio-9-16 bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+        <!-- 상단 영역 -->
+        <div>
+            <div class="flex items-center justify-between p-4 shadow-line">
+                <button  class="text-gray-500 hover:text-gray-700" onclick="gomenu(1)">
+                    &larr; Back
+                </button>
+            </div>
+            <div class="h-48 bg-gray-300 flex items-center justify-center">
+                <img src="/gallery/menuimg/1-2.jpeg">
+            </div>
+            <div class="p-4">
+                <h2 class="text-xl font-bold">치킨</h2>
+                <p class="text-black"><span id="price">21000</span>원</p>
+                <p class="text-gray-600 mt-2">따끈따근하고 맛있는 치킨입니다. 치킨무도 제공해 드려요~</p>
+            </div>
+        </div>
+        
+        <!-- 하단 영역 -->
+        <div class="mt-auto p-4 shadow-line">
+            <div class="flex items-center justify-between">
+                <!-- 수량 버튼 -->
+                <div class="flex items-center">
+                    <button id="decrease" class="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">-</button>
+                    <span id="quantity" class="mx-4">1</span>
+                    <button id="increase" class="px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">+</button>
+                </div>
+                <!-- 계산 버튼 -->
+                <button id="addToCart" class="px-4 py-2 button-bg text-white rounded-lg button-scale" onclick="gomenu(1)">
+                    21000원 담기
+                </button>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        const quantityElement = document.getElementById('quantity');
+        const increaseButton = document.getElementById('increase');
+        const decreaseButton = document.getElementById('decrease');
+        const addToCartButton = document.getElementById('addToCart');
+        const priceElement = document.getElementById('price');
+
+        let quantity = 1;
+        const price = parseInt(priceElement.textContent, 10);
+
+        increaseButton.addEventListener('click', () => {
+            quantity++;
+            updateUI();
+        });
+
+        decreaseButton.addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--;
+                updateUI();
+            }
+        });
+
+        addToCartButton.addEventListener('click', () => {
+            const totalPrice = price * quantity;
+            fetch('/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ totalPrice }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            setTimeout(() => {
+                addToCartButton.classList.remove('button-scale');
+            }, 100);
+        });
+
+        function updateUI() {
+            quantityElement.textContent = quantity;
+            addToCartButton.textContent = `${(price * quantity).toLocaleString()}원 담기`;
+        }
+    </script>
+
+</body>
+</html>

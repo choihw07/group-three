@@ -1,0 +1,41 @@
+/* 최대 크기 제한과 스크롤 활성화 */
+.scrollable-container {
+    max-width: 360px; /* 가로 크기 제한 */
+    max-height: 640px; /* 세로 크기 제한 */
+    height: 100%; /* 컨테이너가 채울 수 있는 높이 */
+    overflow-y: auto; /* 스크롤 활성화 */
+}
+
+/* 눌림 효과 */
+.option-item:active {
+    background-color: #e2e8f0; /* 눌림 시 배경색 */
+    transform: scale(0.98);
+}
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px; /* 상단 컨테이너와 동일한 가로 크기 */
+    background-color: white;
+    border-top: 1px solid #e2e8f0;
+    z-index: 1000;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fixed-footer button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.fixed-footer button:hover {
+    background-color: #0056b3;
+}

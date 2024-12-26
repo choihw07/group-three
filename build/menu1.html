@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포근한어묵</title>
+    <link rel="icon" href="/gallery/icon.png"/>
+    <link rel="apple-touch-icon" href="/gallery/icon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/main/make/menu.css">
+<script type="module" src="/main/make/currentmoney.js"></script>
+<script src="/main/make/menu.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen" style="background-image: url('/gallery/menuimg/background.jpg'); background-size: cover; background-position: center;">
+    <div class="scrollable-container bg-white shadow-lg rounded-lg">
+        <div class="flex justify-between items-center p-2 border-b">
+            <button class="text-gray-500 hover:text-gray-700" onclick="window.location.href='booth.html'">
+                &larr; Back
+            </button>
+            <div id = "currentmoney" class="text-black">현재 잔액</div>
+        </div>
+        <div class="flex p-4 border-b">
+            <div class="w-1/2">
+                <div class="bg-gray-300 h-20 flex items-center justify-center">
+                    <img src="/gallery/menuimg/menu.webp" alt="옵션1사진" class="h-full w-full object-cover rounded-lg">
+                </div>
+            </div>
+            <div class="w-1/2 pl-4">
+                <p class="text-gray-700">추운날 여러분의 몸을 다독여 주는 어묵국물 한잔 먹으러 오세요~</p>
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="space-y-4">
+                <!-- Option 1 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(1)">
+                    <div class="w-3/4">
+                        <p class="text-black">일반 어묵</p>
+                        <p class="text-black">700원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/amuk1.png" alt="일반 어묵 사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <!-- Option 2 -->
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(2)">
+                    <div class="w-3/4">
+                        <p class="text-black">매운 어묵</p>
+                        <p class="text-black">700원</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/amuk2.png" alt="매운 어묵 사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <div class="flex items-center justify-between border p-2 rounded-lg option-item cursor-pointer" onclick="gobuy(3)">
+                    <div class="w-3/4">
+                        <p class="text-black">어묵 국물</p>
+                        <p class="text-black">무료</p>
+                    </div>
+                    <div class="w-1/4 bg-gray-300 h-18 flex items-center justify-center">
+                        <img src="/gallery/menuimg/amuk3.jpg" alt="어묵 국물 사진" class="h-full w-full object-cover rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-footer rounded">
+        <span class="text-black">총 합계: <span id ="cart-total">0원</span> </span>
+        <button id="cart">장바구니 가기</button>
+    </div>
+</body>
+</html>

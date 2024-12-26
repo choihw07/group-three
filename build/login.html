@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/main/make/login.css">
+    <link rel="icon" href="/gallery/icon.png"/>
+    <link rel="apple-touch-icon" href="/gallery/icon.png"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[url('/gallery/menuimg/background.jpg')] bg-cover bg-center text-gray-900 flex items-center justify-center h-screen">
+    <div class="aspect-ratio-9-16 bg-white shadow-lg rounded-lg flex flex-col">
+        <div class="flex justify-between items-center mb-4">
+            <button class="px-4 py-2 button-bg text-white rounded-lg" onclick="window.location.href='/'">
+                돌아가기
+            </button>
+            <div id="user-info" class="text-center text-lg font-bold mb-4 hidden"></div>
+        </div>
+        <div class="flex justify-center mb-6">
+            <img src="/gallery/khlogo.png" alt="Logo" class="logo rounded-full">
+        </div>
+        <h1 class="text-center text-2xl font-bold mb-2">Kyunghee High School</h1>
+        <div id="loggedOut" class="flex-grow flex flex-col items-center justify-start p-4">
+            <input type="email" id="email" placeholder="이메일 주소" class="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mx-auto" required/>
+            <input type="password" id="password" placeholder="비밀번호" class="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mx-auto" required/>
+            <button onclick="login()" class="w-full p-3 button-bg text-white rounded hover:bg-blue-600 transition mx-auto">로그인</button>
+        </div>
+        <div class="flex items-center my-6">    
+            <hr class="flex-grow border-t border-gray-300">
+            <span class="mx-4 text-gray-500">또는</span>
+            <hr class="flex-grow border-t border-gray-300">
+        </div>
+        <button class="w-3/4 p-3 mb-4 border border-gray-300 rounded hover:bg-gray-100 transition mx-auto">카카오 로그인</button>
+        <button class="w-3/4 p-3 mb-4 border border-gray-300 rounded hover:bg-gray-100 transition mx-auto">구글 로그인</button>
+        <button class="w-3/4 p-3 mb-4 border border-gray-300 rounded hover:bg-gray-100 transition mx-auto">페이스북 로그인</button>
+        <p class="text-center text-gray-600 mt-4">계정이 없으신가요? <a href="sign.html" class="text-blue-500 hover:underline">회원가입</a></p>
+        <button onclick="loadCartTotal()">장바구니 금액 로드</button>
+    </div>
+    <script type="module" src="/main/make/login.js"></script>
+</body>
+</html>
+

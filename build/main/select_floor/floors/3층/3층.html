@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .image-container {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">← 돌아가기</a>
+    <div class="image-container">
+        <img src="../../../../gallery/층별정보/3층.png" alt="예시 이미지1" data-full="./3층_지도/image_example1.png">
+    </div>
+</body>
+</html>
